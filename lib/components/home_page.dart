@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_catalog/components/ui/grid_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,9 +26,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           body: TabBarView(children: [
-            Center(
-              child: Text('Здесь фильмы которые ты смотришь'),
-            ),
+            MoviesGridView(),
             Center(
               child: Text('Здесь фильмы которые ты посмотрел'),
             ),
