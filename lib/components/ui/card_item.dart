@@ -12,20 +12,41 @@ class CardItem extends StatefulWidget {
 class _CardItemState extends State<CardItem> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 170,
+    return Container(
+      // decoration: BoxDecoration(border: Border.all()),
+      height: 150,
       width: 80,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            width: 80,
-            height: 100,
-            decoration: BoxDecoration(
-                color: widget.movieCardModel.picture,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
+          Stack(children: [
+            Container(
+              width: 120,
+              height: 150,
+              decoration: BoxDecoration(
+                  color: widget.movieCardModel.picture,
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+            ),
+            Positioned(
+                top: 5,
+                left: 5,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.indigo,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    widget.movieCardModel.rating.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )),
+          ]),
+          Text(
+            widget.movieCardModel.title,
+            textAlign: TextAlign.center,
           ),
-          Text(widget.movieCardModel.title),
         ],
       ),
     );

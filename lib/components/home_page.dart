@@ -15,25 +15,40 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('MoviesCatalog'),
-            backgroundColor: Colors.blueAccent,
+            title: Text(
+              'MoviesCatalog',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.purple,
             bottom: TabBar(
               tabs: [
-                Text('Смотрю'),
-                Text('Просмотрено'),
-                Text('В планах'),
+                Text(
+                  'Смотрю',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'Просмотрено',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  'В планах',
+                  style: TextStyle(color: Colors.white),
+                ),
               ],
             ),
           ),
-          body: TabBarView(children: [
-            MoviesGridView(),
-            Center(
-              child: Text('Здесь фильмы которые ты посмотрел'),
-            ),
-            Center(
-              child: Text('Здесь фильмы которые ты планируешь смотреть'),
-            )
-          ])),
+          body: Padding(
+            padding: const EdgeInsets.all(10),
+            child: TabBarView(children: [
+              MoviesGridView(),
+              Center(
+                child: Text('Здесь фильмы которые ты посмотрел'),
+              ),
+              Center(
+                child: Text('Здесь фильмы которые ты планируешь смотреть'),
+              )
+            ]),
+          )),
     );
   }
 }

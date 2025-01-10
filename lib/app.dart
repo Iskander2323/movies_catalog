@@ -11,6 +11,7 @@ class App extends StatelessWidget {
     return BlocProvider(
         create: (context) => MoviesCatalogBloc(),
         child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routerConfig: routes,
         ));
   }

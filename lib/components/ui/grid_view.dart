@@ -45,7 +45,10 @@ class _MoviesGridViewState extends State<MoviesGridView> {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, mainAxisSpacing: 10, crossAxisSpacing: 10),
+          crossAxisCount: 3,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 1 / 1.6),
       itemBuilder: (context, index) {
         return CardItem(movieCardModel: movies[index]);
       },
