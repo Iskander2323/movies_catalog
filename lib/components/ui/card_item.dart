@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_catalog/components/data/movie_card_model.dart';
+import 'package:movies_catalog/components/data/movie_model.dart';
 
 class CardItem extends StatefulWidget {
   const CardItem({super.key, required this.movieCardModel});
-  final MovieCardModel movieCardModel;
+  final MovieModel movieCardModel;
 
   @override
   State<CardItem> createState() => _CardItemState();
