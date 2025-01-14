@@ -11,6 +11,20 @@ class MovieModel extends Equatable {
       required this.rating,
       required this.watchStatus});
 
+  MovieModel copyWith(
+      {int? id,
+      String? title,
+      Color? picture,
+      double? rating,
+      WatchStatus? watchStatus}) {
+    return MovieModel(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        picture: picture ?? this.picture,
+        rating: rating ?? this.rating,
+        watchStatus: watchStatus ?? this.watchStatus);
+  }
+
   final int id;
   final String title;
   final Color picture;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movies_catalog/components/bloc/movie_catalog_bloc.dart';
 import 'package:movies_catalog/components/data/movie_model.dart';
 
 class CardItem extends StatefulWidget {
@@ -15,8 +16,8 @@ class _CardItemState extends State<CardItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.goNamed('MoviePage'),
-      child: Container(
+      onTap: () {},
+      child: SizedBox(
         // decoration: BoxDecoration(border: Border.all()),
         height: 150,
         width: 80,
@@ -46,6 +47,42 @@ class _CardItemState extends State<CardItem> {
                       style: TextStyle(color: Colors.white),
                     ),
                   )),
+              Positioned(
+                  right: 1,
+                  child: PopupMenuButton<String>(
+                    onSelected: (value) {
+                      switch (value) {
+                        case 'watching':
+                          final WatchStatus newWatchStatus = WatchStatus.values
+                              .firstWhere((element) => element.name == value);
+                          context.read<MoviesCatalogBloc>().add(
+                              ChangeMovieWatchStatus(
+                                  id: widget.movieCardModel.id,
+                                  newWatchStatus: newWatchStatus));
+                        case 'watched':
+                          final WatchStatus newWatchStatus = WatchStatus.values
+                              .firstWhere((element) => element.name == value);
+                          context.read<MoviesCatalogBloc>().add(
+                              ChangeMovieWatchStatus(
+                                  id: widget.movieCardModel.id,
+                                  newWatchStatus: newWatchStatus));
+                        case 'planned':
+                          final WatchStatus newWatchStatus = WatchStatus.values
+                              .firstWhere((element) => element.name == value);
+                          context.read<MoviesCatalogBloc>().add(
+                              ChangeMovieWatchStatus(
+                                  id: widget.movieCardModel.id,
+                                  newWatchStatus: newWatchStatus));
+                        default:
+                      }
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(value: 'watching', child: Text('Watching')),
+                      PopupMenuItem(value: 'watched', child: Text('Watched')),
+                      PopupMenuItem(value: 'planned', child: Text('Planned'))
+                    ],
+                    icon: Icon(Icons.more_vert),
+                  ))
             ]),
             Text(
               widget.movieCardModel.title,

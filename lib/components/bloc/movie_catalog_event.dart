@@ -10,6 +10,8 @@ sealed class MoviesCatalogEvent extends Equatable {
 final class FetchMoviesEvent extends MoviesCatalogEvent {}
 
 final class ChangeMovieWatchStatus extends MoviesCatalogEvent {
-  const ChangeMovieWatchStatus({required this.id});
+  const ChangeMovieWatchStatus(
+      {required this.id, required this.newWatchStatus});
   final int id;
+  final WatchStatus newWatchStatus;
 }

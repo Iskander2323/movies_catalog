@@ -17,6 +17,7 @@ class MoviesCatalogBloc extends Bloc<MoviesCatalogEvent, MoviesCatalogState> {
       : _moviesStatusRepository = moviesStatusRepository,
         super(MoviesCatalogState()) {
     on<FetchMoviesEvent>(_fetchMovies);
+    on<ChangeMovieWatchStatus>(_changeMovieWatchStatus);
   }
 
   void _fetchMovies(FetchMoviesEvent event, Emitter<MoviesCatalogState> emit) {
@@ -31,11 +32,9 @@ class MoviesCatalogBloc extends Bloc<MoviesCatalogEvent, MoviesCatalogState> {
       final plannedMovies = movies
           .where((movies) => movies.watchStatus == WatchStatus.planned)
           .toList();
-      log(watchingMovies.toString());
-      log(watchedMovies.toString());
-      log(plannedMovies.toString());
       emit(state.copyWith(
           status: MovieCatalogStatus.success,
+          allMovies: movies,
           watchingMoviesList: watchingMovies,
           watchedMoviesList: watchedMovies,
           plannedMoviesList: plannedMovies));
@@ -43,5 +42,30 @@ class MoviesCatalogBloc extends Bloc<MoviesCatalogEvent, MoviesCatalogState> {
       log(e.toString(), name: 'MOVIES CATALOG BLOC FETCH MOVIES');
       emit(state.copyWith(status: MovieCatalogStatus.failure));
     }
+  }
+
+  void _changeMovieWatchStatus(
+      ChangeMovieWatchStatus event, Emitter<MoviesCatalogState> emit) {
+    final List<MovieModel> updatedMoviesList = state.allMovies.map((movie) {
+      if (movie.id == event.id) {
+        return movie.copyWith(watchStatus: event.newWatchStatus);
+      } else {
+        return movie;
+      }
+    }).toList();
+    final watchingMovies = updatedMoviesList
+        .where((movies) => movies.watchStatus == WatchStatus.watching)
+        .toList();
+    final watchedMovies = updatedMoviesList
+        .where((movies) => movies.watchStatus == WatchStatus.watched)
+        .toList();
+    final plannedMovies = updatedMoviesList
+        .where((movies) => movies.watchStatus == WatchStatus.planned)
+        .toList();
+    emit(state.copyWith(
+        allMovies: updatedMoviesList,
+        watchingMoviesList: watchingMovies,
+        watchedMoviesList: watchedMovies,
+        plannedMoviesList: plannedMovies));
   }
 }
