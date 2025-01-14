@@ -11,7 +11,10 @@ final class FetchMoviesEvent extends MoviesCatalogEvent {}
 
 final class ChangeMovieWatchStatus extends MoviesCatalogEvent {
   const ChangeMovieWatchStatus(
-      {required this.id, required this.newWatchStatus});
+      {required this.id,
+      required this.newWatchStatus,
+      required this.oldWatchStatus});
   final int id;
   final WatchStatus newWatchStatus;
+  final WatchStatus oldWatchStatus;
 }

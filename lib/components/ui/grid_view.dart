@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:movies_catalog/components/data/movie_model.dart';
 import 'package:movies_catalog/components/ui/card_item.dart';
 
-class MoviesGridView extends StatefulWidget {
-  const MoviesGridView({super.key, required this.movies});
+class MoviesGridView extends StatelessWidget {
+  const MoviesGridView({Key? key, required this.movies}) : super(key: key);
 
   final List<MovieModel> movies;
 
   @override
-  State<MoviesGridView> createState() => _MoviesGridViewState();
-}
-
-class _MoviesGridViewState extends State<MoviesGridView> {
-  @override
   Widget build(BuildContext context) {
-    if (widget.movies.isNotEmpty) {
+    if (movies.isNotEmpty) {
       return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -22,9 +17,9 @@ class _MoviesGridViewState extends State<MoviesGridView> {
             crossAxisSpacing: 10,
             childAspectRatio: 1 / 1.6),
         itemBuilder: (context, index) {
-          return CardItem(movieCardModel: widget.movies[index]);
+          return CardItem(movieCardModel: movies[index]);
         },
-        itemCount: widget.movies.length,
+        itemCount: movies.length,
       );
     } else {
       return Center(child: Text('ADD MOVIES TO THIS CATEGORY'));

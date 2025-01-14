@@ -1,6 +1,6 @@
 import 'package:movies_catalog/components/data/movie_model.dart';
 
-abstract class MovieStatusRepository {
+abstract class MovieStatusRepositoryInterface {
   List<MovieModel> fetchMovies() {
     return [];
   }

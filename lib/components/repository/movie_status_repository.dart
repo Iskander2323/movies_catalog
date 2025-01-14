@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_catalog/components/abstract/repository_interface.dart';
 import 'package:movies_catalog/components/data/movie_model.dart';
 
-class WatchMovieStatusRepository implements MovieStatusRepository {
+class WatchMovieStatusRepository implements MovieStatusRepositoryInterface {
   @override
   List<MovieModel> fetchMovies() {
     final List<MovieModel> movies = [

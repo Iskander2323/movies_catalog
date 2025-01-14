@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_catalog/components/bloc/movie_catalog_bloc.dart';
+import 'package:movies_catalog/components/data/movie_model.dart';
 import 'package:movies_catalog/components/ui/grid_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,17 +52,13 @@ class _HomePageState extends State<HomePage> {
                 case MovieCatalogStatus.success:
                   return Padding(
                     padding: const EdgeInsets.all(10),
-                    child: TabBarView(children: [
-                      MoviesGridView(
-                        movies: state.watchingMoviesList,
-                      ),
-                      MoviesGridView(
-                        movies: state.watchedMoviesList,
-                      ),
-                      MoviesGridView(
-                        movies: state.plannedMoviesList,
-                      ),
-                    ]),
+                    child: TabBarView(
+                        children: WatchStatus.values.map((status) {
+                      final movies =
+                          state.moviesByWatchCategoriesMap[status] ?? [];
+                      return MoviesGridView(
+                          key: ValueKey(status), movies: movies);
+                    }).toList()),
                   );
               }
             },

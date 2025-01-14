@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:movies_catalog/components/bloc/movie_catalog_bloc.dart';
 import 'package:movies_catalog/components/data/movie_model.dart';
 
@@ -58,21 +57,27 @@ class _CardItemState extends State<CardItem> {
                           context.read<MoviesCatalogBloc>().add(
                               ChangeMovieWatchStatus(
                                   id: widget.movieCardModel.id,
-                                  newWatchStatus: newWatchStatus));
+                                  newWatchStatus: newWatchStatus,
+                                  oldWatchStatus:
+                                      widget.movieCardModel.watchStatus));
                         case 'watched':
                           final WatchStatus newWatchStatus = WatchStatus.values
                               .firstWhere((element) => element.name == value);
                           context.read<MoviesCatalogBloc>().add(
                               ChangeMovieWatchStatus(
                                   id: widget.movieCardModel.id,
-                                  newWatchStatus: newWatchStatus));
+                                  newWatchStatus: newWatchStatus,
+                                  oldWatchStatus:
+                                      widget.movieCardModel.watchStatus));
                         case 'planned':
                           final WatchStatus newWatchStatus = WatchStatus.values
                               .firstWhere((element) => element.name == value);
                           context.read<MoviesCatalogBloc>().add(
                               ChangeMovieWatchStatus(
                                   id: widget.movieCardModel.id,
-                                  newWatchStatus: newWatchStatus));
+                                  newWatchStatus: newWatchStatus,
+                                  oldWatchStatus:
+                                      widget.movieCardModel.watchStatus));
                         default:
                       }
                     },
