@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_catalog/components/bloc/movie_catalog_bloc.dart';
 import 'package:movies_catalog/components/data/movie_model.dart';
+import 'package:movies_catalog/components/extensions/string_extensions.dart';
 import 'package:movies_catalog/components/ui/grid_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,21 +25,12 @@ class _HomePageState extends State<HomePage> {
             ),
             backgroundColor: Colors.purple,
             bottom: TabBar(
-              tabs: [
-                Text(
-                  'Смотрю',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'Просмотрено',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Text(
-                  'В планах',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
+                tabs: WatchStatus.values
+                    .map((category) => Text(
+                          category.name.toCapitalized(),
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ))
+                    .toList()),
           ),
           body: BlocBuilder<MoviesCatalogBloc, MoviesCatalogState>(
             builder: (context, state) {
