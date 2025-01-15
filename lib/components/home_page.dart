@@ -43,6 +43,10 @@ class _HomePageState extends State<HomePage> {
           body: BlocBuilder<MoviesCatalogBloc, MoviesCatalogState>(
             builder: (context, state) {
               switch (state.status) {
+                case MovieCatalogStatus.loading:
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 case MovieCatalogStatus.initial:
                   return Center(child: CircularProgressIndicator());
                 case MovieCatalogStatus.failure:

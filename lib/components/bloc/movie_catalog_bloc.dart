@@ -40,6 +40,7 @@ class MoviesCatalogBloc extends Bloc<MoviesCatalogEvent, MoviesCatalogState> {
 
   void _changeMovieWatchStatus(
       ChangeMovieWatchStatus event, Emitter<MoviesCatalogState> emit) {
+    emit(state.copyWith(status: MovieCatalogStatus.loading));
     final updatedMoviesByCategoriesMap =
         Map<WatchStatus, List<MovieModel>>.from(
             state.moviesByWatchCategoriesMap);
@@ -51,6 +52,7 @@ class MoviesCatalogBloc extends Bloc<MoviesCatalogEvent, MoviesCatalogState> {
     updatedMoviesByCategoriesMap[event.newWatchStatus]?.add(updatedMovie);
 
     emit(state.copyWith(
-        moviesByWatchCategoriesMap: updatedMoviesByCategoriesMap));
+        moviesByWatchCategoriesMap: updatedMoviesByCategoriesMap,
+        status: MovieCatalogStatus.success));
   }
 }

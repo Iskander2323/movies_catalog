@@ -3,7 +3,7 @@ import 'package:movies_catalog/components/data/movie_model.dart';
 import 'package:movies_catalog/components/ui/card_item.dart';
 
 class MoviesGridView extends StatelessWidget {
-  const MoviesGridView({Key? key, required this.movies}) : super(key: key);
+  const MoviesGridView({super.key, required this.movies});
 
   final List<MovieModel> movies;
 

@@ -1,6 +1,6 @@
 part of 'movie_catalog_bloc.dart';
 
-enum MovieCatalogStatus { initial, success, failure }
+enum MovieCatalogStatus { initial, success, failure, loading }
 
 final class MoviesCatalogState extends Equatable {
   const MoviesCatalogState({
